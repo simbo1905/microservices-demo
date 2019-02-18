@@ -130,7 +130,7 @@
                     <path>site</path>
                     <noJekyll>true</noJekyll> 
                     <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
-                    <branch>refs/heads/mvn-repo</branch>
+                    <!--<branch>refs/heads/mvn-repo</branch>-->
                     <includes><include>**/*</include></includes>
                     <oauth2Token>${github.global.oauth}</oauth2Token>
                 </configuration>
