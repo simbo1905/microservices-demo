@@ -9,9 +9,7 @@
     <properties>
         <!-- Stand-alone RESTFul application for testing only -->
         <start-class>io.pivotal.microservices.services.Main</start-class>
-        <!-- github server corresponds to entry in ~/.m2/settings.xml -->
-        <!-- see https://stackoverflow.com/a/14013645/329496 -->
-        <github.global.server>github</github.global.server>
+        <github.global.oauth>${GITHUB_OAUTH_TOKEN}</github.global.oauth>
     </properties>
 
     <parent>
@@ -109,29 +107,42 @@
                     <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
                 </configuration>
             </plugin>
-        <plugin>
-            <groupId>com.github.github</groupId>
-            <artifactId>site-maven-plugin</artifactId>
-            <version>0.11</version>
-            <configuration>
-                <message>Maven artifacts for ${project.version}</message>  <!-- git commit message -->
-                <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
-                <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
-                <branch>refs/heads/mvn-repo</branch>                       <!-- remote branch name -->
-                <includes><include>**/*</include></includes>
-                <repositoryName>simbo1905/microservices-demo</repositoryName>      <!-- github repo name -->
-                <repositoryOwner>simbo1905</repositoryOwner>    <!-- github username  -->
-            </configuration>
-            <executions>
-              <!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
-              <execution>
-                <goals>
-                  <goal>site</goal>
-                </goals>
-                <phase>deploy</phase>
-              </execution>
-            </executions>
-        </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.7.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>3.0.0</version>
+            </plugin>
+
+          <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.12</version>
+                <configuration>
+                    <repositoryOwner>simbo1905</repositoryOwner>
+                    <repositoryName>microservices-demo</repositoryName>
+                    <message>Puplishing site for ${project.version}</message>
+                    <path>site</path>
+                    <noJekyll>true</noJekyll> 
+                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+                    <branch>refs/heads/mvn-repo</branch>
+                    <includes><include>**/*</include></includes>
+                    <oauth2Token>${github.global.oauth}</oauth2Token>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>deploy</phase>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
