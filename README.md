@@ -1,12 +1,12 @@
-# maven repo  on github demo
+# maven repo on github demo
 
-To do some testing of microservices deployments I need a 'cheap and cheerful' maven repo I can put put up arbitary file. 
-This repo therefore uses [this](https://stackoverflow.com/a/14013645/329496) instructions to deploy up to a github pages branch. 
+To do some testing of microservices deployments I need a 'cheap and cheerful' maven repo I can put put up arbitary files. 
+This repo therefore uses [these instructions](https://stackoverflow.com/a/14013645/329496) to deploy up to a github pages branch. 
 Note you need to generate a GitHub personal access token and give it the scope to publish to the repo and read your email address
-as per [this](https://github.com/github/maven-plugins/issues/63#issuecomment-102610887). Then you need so set the token as an
-envar with `export GITHUB_OAUTH_TOKEN=xxx`. I _didn't_ have to add anything to my `~/.m2/settings` 
+[as per this](https://github.com/github/maven-plugins/issues/63#issuecomment-102610887). Then you need so set the token as an
+envar with `export GITHUB_OAUTH_TOKEN=xxx` so that maven can use to deploy with. I _didn't_ have to add anything to my `~/.m2/settings` 
 
-The example deployed to a branch `mvn-repo` as I found it easier to publish to the `gh-pages` branch. You can see a file there with:
+The example I copied was deploying to a branch `mvn-repo` as I found it easier to publish to the `gh-pages` branch that is exposed as a website by default. You can see a file there with:
 
 ```
 curl https://simbo1905.github.io/microservices-demo/site/org/springframework/samples/service/service/microservices-demo/maven-metadata.xml
