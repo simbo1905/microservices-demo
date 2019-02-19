@@ -1,7 +1,7 @@
 # maven repo on github demo
 
 To do some testing of microservices deployments I need a 'cheap and cheerful' maven repo I can put put up arbitary files. 
-This repo therefore uses [these instructions](https://stackoverflow.com/a/14013645/329496) to deploy up to a github pages branch. 
+This repo therefore uses [these instructions](https://stackoverflow.com/a/14013645/329496) to deploy up to a github pages branch. Beware: GitHub wont let you upload huge JARs so its not really a valid approach except for experments. 
 Note you need to generate a GitHub personal access token and give it the scope to publish to the repo and read your email address
 [as per this](https://github.com/github/maven-plugins/issues/63#issuecomment-102610887). Then you need so set the token as an
 envar with `export GITHUB_OAUTH_TOKEN=xxx` so that maven can use to deploy with. I _didn't_ have to add anything to my `~/.m2/settings` 
